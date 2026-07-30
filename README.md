@@ -16,7 +16,6 @@ GeoKRL/
 │
 ├── data_collection/
 │   ├── Biomass.js
-│   ├── Canopy.js
 │   ├── Climate.js
 │   ├── dem_slope.js
 │   ├── LC.js
