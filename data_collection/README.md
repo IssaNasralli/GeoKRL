@@ -15,7 +15,6 @@ Each script exports one specific geospatial layer for all Regions of Interest (R
 | `LC.js` | Exports ESA WorldCover land-cover maps. |
 | `NTL.js` | Exports nighttime light imagery. |
 | `Climate.js` | Exports ERA5-Land annual median temperature. |
-| `Canopy.js` | Exports tree canopy cover. |
 | `Biomass.js` | Exports above-ground biomass. |
 | `dem_slope.js` | Exports Digital Elevation Model (DEM) and terrain slope. |
 | `shape_file.js` | Generates ROI shapefiles used for extracting World Settlement Footprint (WSF 2019) and WorldPop 2022 datasets outside Google Earth Engine. |
