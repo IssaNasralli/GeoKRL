@@ -12,7 +12,7 @@ The complete GeoKG dataset is distributed in two compressed parts.
 
 | File | Download |
 |------|----------|
-| GeoKG Part 1 | **To be added** |
+| GeoKG Part 1 | https://drive.google.com/file/d/18FeNggI7lcVv-CRhRg5W2W0FrmJMZaEy/view?usp=drive_link |
 | GeoKG Part 2 | https://drive.google.com/file/d/1bET66fWxY3idqiD4gmxt8rdt5YGEwa1s/view?usp=drive_link |
 
 > **Note**
