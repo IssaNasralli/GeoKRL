@@ -165,17 +165,19 @@ contains the global minimum and maximum values computed across the entire GeoKG 
 
 Example
 
-| Layer | Min | Max |
-|--------|-----|-----|
-| biomass | ... | ... |
-| climate | ... | ... |
-| dem | ... | ... |
-| ndvi | ... | ... |
-| ntl | ... | ... |
-| population | ... | ... |
-| rgb_red | ... | ... |
-| rgb_green | ... | ... |
-| rgb_blue | ... | ... |
+| Layer | Minimum | Maximum |
+|--------|---------:|---------:|
+| Biomass | 0.0 | 526.0 |
+| Building | 0.0 | 255.0 |
+| Climate | 276.72472417199 | 300.43162423153 |
+| DEM | -113.0 | 3082.0 |
+| Land Cover | 0.0 | 8.0 |
+| NDVI | -1.0 | 1.0 |
+| Nighttime Lights | 0.0 | 287.17218017578 |
+| Population | 0.0 | 981.05548095703 |
+| RGB Red | 0.0 | 17416.0 |
+| RGB Green | 0.0 | 18296.0 |
+| RGB Blue | 0.0 | 18424.0 |
 
 These statistics are automatically loaded by the GeoKRL framework during training to perform min-max normalization.
 
