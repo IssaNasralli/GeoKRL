@@ -1,6 +1,6 @@
-# GeoKRL: A Geospatial Knowledge Representation Learning Framework
+# GeoKRL: A Self-Supervised Multimodal Foundation Model for Geospatial Representation Learning
 
-GeoKRL is a self-supervised multimodal foundation learning framework for geospatial representation learning. It is designed to learn transferable latent representations from heterogeneous Earth observation data that can subsequently be adapted to multiple downstream geospatial prediction tasks.
+GeoKRL is a self-supervised multimodal foundation learning framework designed to learn transferable geospatial representations from heterogeneous Earth observation data. The learned backbone can be transferred to multiple downstream geospatial prediction tasks, including population estimation, biomass estimation, and building mapping.
 
 This repository accompanies the paper:
 
@@ -9,13 +9,17 @@ This repository accompanies the paper:
 
 ---
 
-## Repository Structure
+# Repository Structure
 
 ```
 GeoKRL/
 │
+├── GeoKG_dataset/
+│   └── README.md
+│
 ├── data_collection/
 │   ├── Biomass.js
+│   ├── Canopy.js
 │   ├── Climate.js
 │   ├── dem_slope.js
 │   ├── LC.js
@@ -34,7 +38,6 @@ GeoKRL/
 │   ├── GeoKRL.py
 │   ├── train.py
 │   ├── train_task.py
-│   ├── config.py
 │   ├── dataset_index.py
 │   ├── raster_manager.py
 │   ├── sample_generator.py
@@ -42,6 +45,7 @@ GeoKRL/
 │   ├── modality_sampler.py
 │   ├── batch_generator.py
 │   ├── batch_generator_task.py
+│   ├── config.py
 │   ├── hyperparameters.py
 │   ├── task_hyperparameters.py
 │   ├── best_pretraining_config.py
@@ -53,9 +57,9 @@ GeoKRL/
 
 ---
 
-# Workflow
+# Overall Workflow
 
-The complete GeoKRL pipeline consists of three sequential stages.
+The complete GeoKRL framework consists of four sequential stages.
 
 ```
 Google Earth Engine
@@ -65,9 +69,6 @@ Data Collection
 (JavaScript)
         │
         ▼
-GeoTIFF Layers
-        │
-        ▼
 Data Preprocessing
 (ArcPy)
         │
@@ -75,21 +76,22 @@ Data Preprocessing
 GeoKG Dataset
         │
         ▼
-GeoKRL Pretraining
-(Self-supervised)
+GeoKRL Self-Supervised Pretraining
         │
         ▼
 Pretrained Backbone
         │
         ▼
-Downstream Prediction
+Downstream Prediction Tasks
 ```
 
 ---
 
 # 1. Data Collection
 
-The `data_collection` directory contains Google Earth Engine (GEE) JavaScript scripts used to download all datasets employed in GeoKRL.
+The `data_collection` directory contains Google Earth Engine (GEE) JavaScript scripts used to download all remote sensing datasets employed in this work.
+
+The scripts automatically export two 50 km × 50 km regions of interest (ROIs) for each study country.
 
 Available scripts include:
 
@@ -98,36 +100,65 @@ Available scripts include:
 | `rgb.js` | Sentinel-2 RGB imagery |
 | `NDVI.js` | Normalized Difference Vegetation Index |
 | `NTL.js` | Nighttime Lights |
-| `LC.js` | Land Cover |
-| `Climate.js` | Climate variables |
+| `LC.js` | ESA WorldCover Land Cover |
+| `Climate.js` | ERA5-Land climate variables |
 | `Biomass.js` | Above-ground biomass |
 | `Canopy.js` | Forest canopy height |
 | `dem_slope.js` | DEM and terrain slope |
-| `shape_file.js` | Study-area polygons |
+| `shape_file.js` | ROI polygons |
 
 ---
 
 # 2. Data Preprocessing
 
-The `data_preprocessing` directory contains ArcPy scripts for preparing the downloaded raster datasets.
+The `data_preprocessing` directory contains ArcPy scripts that transform the downloaded datasets into a unified multimodal benchmark.
 
-These scripts perform operations such as:
+The preprocessing pipeline performs:
 
-- ROI extraction
-- raster alignment
-- reprojection
-- snapping all rasters to the RGB grid
-- computation of global normalization statistics
+- extraction of ROI-specific rasters;
+- clipping of global datasets;
+- raster reprojection;
+- raster alignment;
+- snapping every modality onto the RGB grid;
+- generation of global normalization statistics.
 
-The output is the GeoKG dataset used for both pretraining and downstream experiments.
+The output of this stage is the **GeoKG** dataset used throughout the paper.
 
 ---
 
-# 3. GeoKRL Model
+# 3. GeoKG Dataset
+
+The `GeoKG_dataset` directory provides access to the complete benchmark dataset used in this study.
+
+GeoKG is obtained after executing all data collection and preprocessing steps contained in this repository.
+
+The dataset contains co-registered multimodal raster patches collected over multiple countries and includes:
+
+- Sentinel-2 RGB imagery
+- Digital Elevation Model (DEM)
+- Terrain slope
+- NDVI
+- Nighttime lights
+- Climate
+- Above-ground biomass
+- Forest canopy height
+- Land cover
+- Population density
+- Building footprints
+
+Every modality is perfectly aligned on the same spatial grid, allowing direct multimodal learning.
+
+> **Note**
+>
+> Because the complete GeoKG dataset is several gigabytes in size, it is distributed separately from the source code repository.
+>
+> The `GeoKG_dataset` folder contains instructions and links for downloading the dataset.
+
+---
+
+# 4. GeoKRL Model
 
 The `model` directory contains the complete implementation of the proposed framework.
-
-Main components include:
 
 | File | Description |
 |------|-------------|
@@ -137,25 +168,25 @@ Main components include:
 | `dataset_index.py` | Hierarchical dataset indexing |
 | `raster_manager.py` | Dynamic raster loading |
 | `sample_generator.py` | On-demand sample generation |
-| `sample_generator_task.py` | Downstream sample generation |
+| `sample_generator_task.py` | Downstream task sample generation |
 | `modality_sampler.py` | Multimodal sampling strategy |
 | `batch_generator.py` | Pretraining batch generator |
 | `batch_generator_task.py` | Downstream batch generator |
 | `config.py` | Dataset configuration |
-| `hyperparameters.py` | Backbone hyperparameters |
-| `task_hyperparameters.py` | Downstream hyperparameters |
+| `hyperparameters.py` | Backbone hyperparameter search space |
+| `task_hyperparameters.py` | Downstream hyperparameter search space |
 
 ---
 
 # Model Checkpoints
 
-Pretrained models are automatically saved in
+Pretrained GeoKRL backbone weights are automatically saved in
 
 ```
 model/auto_train_models/
 ```
 
-Task-specific models are automatically saved in
+Task-specific prediction models are automatically saved in
 
 ```
 model/task_auto_train_models/
@@ -199,48 +230,60 @@ python model/train_task.py
 
 ---
 
-# Dataset
+# Downloading the GeoKG Dataset
 
-GeoKRL is trained using the **GeoKG** multimodal geospatial dataset introduced in the accompanying paper.
+The benchmark dataset can be downloaded from the `GeoKG_dataset` directory.
 
-The dataset consists of multiple co-registered raster modalities collected over several countries, including:
+After downloading, place the extracted dataset as follows:
 
-- RGB imagery
-- DEM
-- Terrain slope
-- NDVI
-- Nighttime lights
-- Climate variables
-- Biomass
-- Forest canopy
-- Land cover
-- Population
-- Building footprints
+```
+GeoKRL/
 
-Dataset availability will be announced upon publication.
+├── GeoKG/
+│   ├── rgb/
+│   ├── dem/
+│   ├── slope/
+│   ├── ndvi/
+│   ├── ntl/
+│   ├── climate/
+│   ├── biomass/
+│   ├── canopy/
+│   ├── lc/
+│   ├── population/
+│   ├── building/
+│   └── normalization_statistics.csv
+```
+
+The dataset organization is fully compatible with the provided implementation.
 
 ---
 
 # Citation
 
-If you use this repository in your research, please cite:
+If you use GeoKRL or the GeoKG dataset in your research, please cite:
 
 ```bibtex
-Citation will be added after publication.
+Citation information will be added after publication.
 ```
 
 ---
 
 # License
 
-This repository is released under the MIT License.
+This project is released under the MIT License.
 
 ---
 
 # Contact
 
-For questions regarding the implementation, please open a GitHub issue or contact the corresponding author.
+For questions, bug reports, or suggestions, please open a GitHub Issue or contact the corresponding author.
 
 ---
 
-**GeoKRL** is developed for scalable self-supervised geospatial representation learning and reproducible multimodal Earth observation research.
+**GeoKRL** provides a complete and reproducible pipeline covering:
+
+- multimodal geospatial data collection;
+- large-scale dataset preprocessing;
+- construction of the GeoKG benchmark;
+- self-supervised foundation model pretraining;
+- downstream geospatial prediction using transferable representations.
