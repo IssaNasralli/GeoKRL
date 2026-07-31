@@ -230,34 +230,6 @@ python model/train_task.py
 
 ---
 
-# Downloading the GeoKG Dataset
-
-The benchmark dataset can be downloaded from the `GeoKG_dataset` directory.
-
-After downloading, place the extracted dataset as follows:
-
-```
-GeoKRL/
-
-├── GeoKG/
-│   ├── rgb/
-│   ├── dem/
-│   ├── slope/
-│   ├── ndvi/
-│   ├── ntl/
-│   ├── climate/
-│   ├── biomass/
-│   ├── canopy/
-│   ├── lc/
-│   ├── population/
-│   ├── building/
-│   └── normalization_statistics.csv
-```
-
-The dataset organization is fully compatible with the provided implementation.
-
----
-
 # Citation
 
 If you use GeoKRL or the GeoKG dataset in your research, please cite:
