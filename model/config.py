@@ -29,15 +29,14 @@ NDVI = "ndvi"
 LAND_COVER = "lc"
 NTL = "ntl"
 CLIMATE = "climate"
-BUILDING = "building"
 
 ANCILLARY_LAYERS = [    DEM,
                         SLOPE,
                         NDVI,
                         LAND_COVER,
                         NTL,
-                        CLIMATE,
-                        BUILDING]
+                        CLIMATE
+                        ]
 
 TASK_POPULATION = "population"
 TASK_BIOMASS = "biomass"
@@ -48,7 +47,6 @@ TASKS = [   TASK_POPULATION,
             TASK_BUILDING] 
 
 TASK_MODALITIES = { TASK_POPULATION: [  NTL,
-                                        BUILDING,
                                         LAND_COVER,
                                         SLOPE],
 
