@@ -3,8 +3,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 DATASET_ROOT = os.path.join(PROJECT_ROOT, "GeoKG")
 NORMALIZATION_CSV = os.path.join(DATASET_ROOT, "normalization_statistics.csv")
 TRAIN_COUNTRIES = ["a", "b", "c", "g","i", "p", "u", "v"]
-VALIDATION_COUNTRIES = ["f", "m", "r"]
-TEST_COUNTRIES = ["d", "k", "n", "t"]
+VALIDATION_COUNTRIES = ["d", "m", "r"]
+TEST_COUNTRIES = ["f", "k", "n", "t"]
 ROI_NAMES = ["roi_1","roi_2"]
 COUNTRIES = {   "a": "Australia",
                 "b": "Brazil",
