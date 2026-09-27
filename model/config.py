@@ -52,8 +52,8 @@ TASK_MODALITIES = { TASK_POPULATION: [  NTL,
 
                     TASK_BIOMASS: [ DEM,
                                     NDVI,
-                                    CLIMATE,
-                                    LAND_COVER],
+                                    CLIMATE
+                                    ],
 
                     TASK_BUILDING: [    NTL,
                                         SLOPE,
