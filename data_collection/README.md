@@ -6,7 +6,7 @@ Each script exports one specific geospatial layer for all Regions of Interest (R
 
 ---
 
-## Folder Contents
+## Folder Contents 
 
 | File | Description |
 |------|-------------|
