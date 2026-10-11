@@ -1,4 +1,4 @@
-# GeoKG Dataset
+# GeoKG Dataset 
 
 GeoKG is a large-scale multimodal geospatial dataset developed for self-supervised representation learning and downstream geospatial prediction. The dataset accompanies the **GeoKRL** framework and contains co-registered raster layers extracted over multiple countries using a unified acquisition and preprocessing pipeline.
 
