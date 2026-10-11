@@ -63,7 +63,7 @@ The ROI locations are fixed throughout the entire GeoKRL framework and correspon
 
 | Code | Country |
 |------|---------|
-| f | France |
+| d | Canada |
 | m | Mexico |
 | r | Argentina |
 
@@ -71,7 +71,7 @@ The ROI locations are fixed throughout the entire GeoKRL framework and correspon
 
 | Code | Country |
 |------|---------|
-| d | Canada |
+| f | France  |
 | k | Kenya |
 | n | Indonesia |
 | t | Tunisia |
