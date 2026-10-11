@@ -134,7 +134,7 @@ The same country split is used for all experiments.
 
 | Code | Country |
 |------|---------|
-| f | France |
+| d | Canada |
 | m | Mexico |
 | r | Argentina |
 
@@ -144,7 +144,7 @@ The same country split is used for all experiments.
 
 | Code | Country |
 |------|---------|
-| d | Canada |
+| f | France |
 | k | Kenya |
 | n | Indonesia |
 | t | Tunisia |
